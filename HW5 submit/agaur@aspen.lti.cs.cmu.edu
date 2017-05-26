@@ -1,0 +1,23 @@
+
+
+def accuracy():
+    import sys
+    predict_labels_path = sys.argv[1]
+    true_labels_path = sys.argv[2]
+    lines = [line.split() for line in open(predict_labels_path)]
+    lines.sort(key=lambda x: x[0])
+    predict_labels = [line[-1][1:-1] for line in lines]
+    lines = [line.split(';') for line in open(true_labels_path)]
+    true_labels = [line[-1].replace('\n', '') for line in lines]
+
+    acc = 0
+    print len(predict_labels)
+    print len(true_labels)
+    for i in range(len(predict_labels)):
+        if predict_labels[i] == true_labels[i]:
+            acc += 1
+
+    print acc / float(len(predict_labels))
+
+if __name__ == '__main__':
+    accuracy()
